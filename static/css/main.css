@@ -168,8 +168,8 @@ a, a:visited, a:link {
 }
 
 .bgStatus .currentBG {
-  font-size: 220px;
-  line-height: 200px;
+  font-size: 170px;
+  line-height: 150px;
   text-decoration: line-through;
   vertical-align: middle;
 }
@@ -266,7 +266,7 @@ a, a:visited, a:link {
 
 .status {
   color: #808080;
-  font-size: 150px;
+  font-size: 100px;
   white-space: normal;
 }
 .statusBox {
