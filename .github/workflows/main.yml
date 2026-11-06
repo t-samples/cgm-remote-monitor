@@ -11,6 +11,28 @@ on:
       - dev
 
 jobs:
+  image-context:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Verify state and keys stay out of the Docker build context
+        run: |
+          packet=$(mktemp -d)
+          output=$(mktemp -d)
+          cp .dockerignore "$packet/"
+          mkdir -p "$packet"/{mongo-data,letsencrypt,lib}
+          touch "$packet/mongo-data/medical-canary" "$packet/letsencrypt/acme.json" "$packet/lib/test.p8" "$packet/lib/test.sqlite"
+          echo '{}' > "$packet/package.json"
+          printf 'FROM scratch\nCOPY . /context/\n' > "$packet/Dockerfile"
+          docker buildx build --output "type=local,dest=$output" "$packet"
+          test -f "$output/context/package.json"
+          test ! -e "$output/context/mongo-data/medical-canary"
+          test ! -e "$output/context/letsencrypt/acme.json"
+          test ! -e "$output/context/lib/test.p8"
+          test ! -e "$output/context/lib/test.sqlite"
+
   test:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -34,7 +56,7 @@ jobs:
           mongodb-version: ${{ matrix.mongodb-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run Tests
         run: npm run-script test-ci
       - name: Send Coverage

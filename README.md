@@ -247,6 +247,8 @@ To learn more about the Nightscout API, visit https://YOUR-SITE.com/api-docs/ or
   * `ENABLE` - Used to enable optional features, expects a space delimited list, such as: `careportal rawbg iob`, see [plugins](#plugins) below
   * `DISABLE` - Used to disable default features, expects a space delimited list, such as: `direction upbat`, see [plugins](#plugins) below
   * `BASE_URL` - Used for building links to your site's API, i.e. Pushover callbacks, usually the URL of your Nightscout site.
+  * `NS_TRUSTED_PROXY_CIDRS` (empty by default) - comma-separated IP addresses/CIDRs of reverse proxies you administer. Authentication throttling uses the actual socket peer unless the peer matches this list. Trusted proxies must append or replace forwarding headers correctly. With an empty list, users behind one proxy share its failed-login budget.
+
   * `AUTH_DEFAULT_ROLES` (`readable`) - possible values `readable`, `denied`, or any valid role
     name.  When `readable`, anyone can view Nightscout without a token.
     Setting it to `denied` will require a token from every visit, using `status-only` will enable api-secret based login.
@@ -838,3 +840,5 @@ License
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+See [bound Loop notifications](docs/bound-loop.md) for the separately permissioned command route and compatibility requirements.

@@ -1,18 +1,36 @@
-# Don't include the .git history in the Docker image:
-.git
-
-# Items from .gitignore
-bower_components/
-node_modules/
-bundle/bundle.out.js
-.idea/
-*.iml
-my.env
-*.env
-static/bower_components/
-.*.sw?
-.DS_Store
-.vagrant
-/iisnode
-coverage/
-npm-debug.log
+# Build only the application sources and support files consumed by Node/webpack.
+**
+!package.json
+!package-lock.json
+!.babelrc
+!.browsersistrc
+!lib/
+!lib/**
+!bin/
+!bin/**
+!static/
+!static/**
+!views/
+!views/**
+!translations/
+!translations/**
+!webpack/
+!webpack/**
+!bundle/
+!bundle/*.source.js
+!assets/
+!assets/**
+# Never copy local credentials or private state even below an included directory.
+**/*.pem
+**/*.key
+**/.env
+**/*.env
+**/node_modules/
+**/mongo-data/
+**/letsencrypt/
+**/*.sqlite*
+**/*.db
+**/*.jsonl
+**/*.p12
+**/*.pfx
+**/*.p8
