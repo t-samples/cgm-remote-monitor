@@ -177,11 +177,15 @@ $ npm install
 - HTTP Strict Transport Security (HSTS) headers are enabled by default, use settings `SECURE_HSTS_HEADER` and `SECURE_HSTS_HEADER_*`
 - See [Predefined values for your server settings](#predefined-values-for-your-server-settings-optional) for more details
 
+## Node.js runtime
+
+Build and run this fork with Node.js 24 LTS and its npm 11 release line. Use `npm ci` with the committed lockfile. The application startup check reads the engine declared by the package. The optional legacy Share and MiniMed bridge dependencies declare older Node engine ranges; an operator who uses either integration must separately verify that uploader's compatibility before a production rollout. Synthetic tests do not establish physical delivery.
+
 ## Installation notes for Microsoft Azure, Windows:
 
 - If deploying the software to Microsoft Azure, you must set ** in the app settings for *WEBSITE_NODE_DEFAULT_VERSION* and *SCM_COMMAND_IDLE_TIMEOUT* **before** you deploy the latest Nightscout or the site deployment will likely fail. Other hosting environments do not require this setting. Additionally, if using the Azure free hosting tier, the installation might fail due to resource constraints imposed by Azure on the free hosting. Please set the following settings to the environment in Azure:
 ```
-WEBSITE_NODE_DEFAULT_VERSION=16.16.0
+WEBSITE_NODE_DEFAULT_VERSION=24.22.2
 SCM_COMMAND_IDLE_TIMEOUT=300
 ```
 - See [install MongoDB, Node.js, and Nightscouton a single Windows system](https://github.com/jaylagorio/Nightscout-on-Windows-Server). if you want to host your Nightscout outside of the cloud. Although the instructions are intended for Windows Server the procedure is compatible with client versions of Windows such as Windows 7 and Windows 10.
