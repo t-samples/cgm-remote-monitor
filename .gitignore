@@ -34,3 +34,11 @@ npm-debug.log
 # directories created by docker-compose.yml
 mongo-data/
 letsencrypt/
+
+# Local service state and private keys
+*.sqlite*
+*.p8
+*.p12
+*.pfx
+*.key
+.env
